@@ -3,13 +3,24 @@ import matplotlib.pyplot as plt
 
 x1 = 0.8
 x2 = 0.4
-neurons = [[0.6, -0.2, 0.1], [0.3, 0.5, -0.1], [-0.4, 0.8, 0.2]]
 target = 0.9
 learning_speed = 0.1
 y = 0
 
-def ponderate_sum(x1, x2, w1, w2, b):
-    z = (x1 * w1) + (x2 * w2) + b
+neurons = [[0.6, -0.2, 0.1], [0.3, 0.5, -0.1], [-0.4, 0.8, 0.2]]
+neurons2 = [[0.8, 0.7, 0.3, -0.3], [0.4, 0.1, -0.6, 0.3]]
+neurons3 = [[0.1, 0.2, 0.3], [0.4, 0.5, 0.4], [0.3, 0.2, 0.1], [-0.1, -0.2, -0.3]]
+
+network = [
+    neurons,
+    neurons2,
+    neurons3
+]
+
+def ponderate_sum(entries, weight, bias):
+    z = bias
+    for i in range(0, len(entries)):
+        z += (entries[i] * weight[i])
     return z
 
 def sigmoide(z):
@@ -56,5 +67,19 @@ plt.ylabel("Pourcentage d'erreur")
 plt.plot(errors)
 plt.show()"""
 
-for i in range(0, 3):
-    for j in range(0, 3)
+entries = [[x1, x2]]
+
+def forward_propagation(entries, network):
+    activations = entries
+    for ele in network:
+        new_output = []
+        for i in range(0, len(ele)):
+            z = ponderate_sum(activations[len(activations) - 1],
+                              ele[i][0:len(ele) - 1],
+                              ele[i][len(ele) - 1]
+                              )
+            new_output.append(sigmoide(z))
+        activations += [new_output]
+    return activations
+
+print(forward_propagation(entries, network))
