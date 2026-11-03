@@ -1,4 +1,3 @@
-import math
 import matplotlib.pyplot as plt
 
 x1 = 0.8
@@ -75,8 +74,8 @@ def forward_propagation(entries, network):
         new_output = []
         for i in range(0, len(ele)):
             z = ponderate_sum(activations[len(activations) - 1],
-                              ele[i][0:len(ele) - 1],
-                              ele[i][len(ele) - 1]
+                              ele[i][0:len(ele[i]) - 1],
+                              ele[i][len(ele[i]) - 1]
                               )
             new_output.append(sigmoide(z))
         activations += [new_output]
